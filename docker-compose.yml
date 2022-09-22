@@ -32,11 +32,12 @@ services:
   spring:
     image: unacha/spring-boot-realworld
     container_name: spring-boot-realworld
+    restart: always
     build:
       context: ${PWD}/spring-boot-realworld
       dockerfile: ${PWD}}/spring-boot-realworld/Dockerfile
     ports:
-      - 8081:8080
+      - 8081:8081
     depends_on:
       - database
     networks:
