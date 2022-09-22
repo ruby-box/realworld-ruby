@@ -1,0 +1,46 @@
+version: '1'
+
+services:
+  database:
+    container_name: mysql_db
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: realworld
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: kakaobank
+      TZ: 'Asia/Seoul'
+    ports:
+      - "3306:3306"
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    networks:
+      - test_network
+  vue:
+    image: unacha/vue-realworld
+    container_name: vue-realworld
+    volumes:
+      - ${PWD}/vue-realworld:/app
+    build:
+      context: ${PWD}/vue-realworld
+      dockerfile: ${PWD}/vue-realworld/Dockerfile
+    ports:
+      - 8080:80
+    networks:
+      - test_network
+  spring:
+    image: unacha/spring-boot-realworld
+    container_name: spring-boot-realworld
+    build:
+      context: ${PWD}/spring-boot-realworld
+      dockerfile: ${PWD}}/spring-boot-realworld/Dockerfile
+    ports:
+      - 8081:8080
+    depends_on:
+      - database
+    networks:
+      - test_network
+
+networks:
+  test_network:

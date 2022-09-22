@@ -79,3 +79,12 @@ Use spotless for code format.
 # Help
 
 Please fork and PR to improve the project.
+
+
+# 변경사항
+
+## 도커 이미지 빌드하기
+
+```bash
+docker build -t unacha/spring-boot-realworld .
+```
