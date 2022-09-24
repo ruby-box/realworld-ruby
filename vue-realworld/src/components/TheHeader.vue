@@ -60,6 +60,15 @@
           <router-link
             class="nav-link"
             active-class="active"
+            :to="{ name: 'article-history' }"
+          >
+            <i class="ion-clock"></i>&nbsp;Article History
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            class="nav-link"
+            active-class="active"
             exact
             :to="{ name: 'settings' }"
           >

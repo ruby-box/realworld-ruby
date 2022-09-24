@@ -71,6 +71,12 @@ export default new Router({
       path: "/editor/:slug?",
       props: true,
       component: () => import("@/views/ArticleEdit")
+    },
+    {
+      name: "article-history",
+      path: "/article-history",
+      props: true,
+      component: () => import("@/views/ArticleHistory")
     }
   ]
 });
