@@ -52,6 +52,7 @@ public class MyBatisArticleRepository implements ArticleRepository {
 
   @Override
   public void remove(Article article) {
+    articleMapper.deleteArticleTagById(article.getId());
     articleMapper.delete(article.getId());
   }
 }

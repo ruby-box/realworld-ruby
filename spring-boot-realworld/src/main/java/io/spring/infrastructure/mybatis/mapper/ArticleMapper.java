@@ -15,6 +15,8 @@ public interface ArticleMapper {
 
   void insertTag(@Param("tag") Tag tag);
 
+  void deleteArticleTagById(@Param("id") String id);
+
   void insertArticleTagRelation(@Param("articleId") String articleId, @Param("tagId") String tagId);
 
   Article findBySlug(@Param("slug") String slug);

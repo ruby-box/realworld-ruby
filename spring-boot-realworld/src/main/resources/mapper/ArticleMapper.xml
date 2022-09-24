@@ -58,6 +58,10 @@
         select id, name from tags where name = #{tagName}
     </select>
 
+    <delete id="deleteArticleTagById">
+        delete from article_tags where article_id = #{id}
+    </delete>
+
     <select id="findBySlug" resultMap="article">
         <include refid="selectArticle"/>
         where A.slug = #{slug}
