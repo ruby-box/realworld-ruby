@@ -6,7 +6,6 @@ import io.spring.Util;
 
 import java.util.*;
 
-import io.spring.entity.ArticleEntityListener;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@EntityListeners(value = { ArticleEntityListener.class } )
 @Entity
 @Table(name = "articles")
 public class Article {

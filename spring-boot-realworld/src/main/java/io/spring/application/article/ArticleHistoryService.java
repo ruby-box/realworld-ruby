@@ -1,15 +1,16 @@
 package io.spring.application.article;
 
-import io.spring.BeanUtils;
 import io.spring.core.article.Article;
 import io.spring.domain.article.ArticleHistory;
 import io.spring.domain.article.ArticleHistoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class ArticleHistoryService {
+    private final ArticleHistoryRepository articleHistoryRepository;
     public void save(Article article, String mode) {
-        ArticleHistoryRepository articleHistoryRepository = BeanUtils.getBean(ArticleHistoryRepository.class);
         System.out.println(">>> save history!!! ");
 
         ArticleHistory articleHistory = new ArticleHistory();
