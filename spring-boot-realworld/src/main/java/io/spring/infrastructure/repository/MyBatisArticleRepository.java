@@ -27,6 +27,7 @@ public class MyBatisArticleRepository implements ArticleRepository {
   }
 
   private void createNew(Article article) {
+    articleMapper.insert(article);
     for (Tag tag : article.getTags()) {
       Tag targetTag =
           Optional.ofNullable(articleMapper.findTag(tag.getName()))
@@ -37,7 +38,6 @@ public class MyBatisArticleRepository implements ArticleRepository {
                   });
       articleMapper.insertArticleTagRelation(article.getId(), targetTag.getId());
     }
-    articleMapper.insert(article);
   }
 
   @Override

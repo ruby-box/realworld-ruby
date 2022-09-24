@@ -3,24 +3,40 @@ package io.spring.core.article;
 import static java.util.stream.Collectors.toList;
 
 import io.spring.Util;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+
+import java.util.*;
+
+import io.spring.entity.ArticleEntityListener;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.joda.time.DateTime;
 
+import javax.persistence.*;
+
 @Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
+@EntityListeners(value = { ArticleEntityListener.class } )
+@Entity
+@Table(name = "articles")
 public class Article {
   private String userId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
   private String slug;
   private String title;
   private String description;
   private String body;
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "article_tags",
+          joinColumns = @JoinColumn(name = "article_id"),
+          inverseJoinColumns = @JoinColumn(name = "tag_id")
+  )
   private List<Tag> tags;
   private DateTime createdAt;
   private DateTime updatedAt;
@@ -67,4 +83,21 @@ public class Article {
   public static String toSlug(String title) {
     return title.toLowerCase().replaceAll("[\\&|[\\uFE30-\\uFFA0]|\\’|\\”|\\s\\?\\,\\.]+", "-");
   }
+
+  /*
+  @PrePersist
+  public void prePersist() {
+    System.out.println("prePersist!!!!");
+  }
+
+  @PreUpdate
+  public void preUpdate() {
+    System.out.println("preUpdate!!!!");
+  }
+
+  @PreRemove
+  public void preRemove() {
+    System.out.println("preRemove!!!!");
+  }
+   */
 }

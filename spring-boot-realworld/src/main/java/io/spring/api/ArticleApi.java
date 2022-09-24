@@ -12,7 +12,10 @@ import io.spring.core.service.AuthorizationService;
 import io.spring.core.user.User;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import javax.validation.Valid;
+
+import io.spring.event.ArticleEventPubisher;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +34,8 @@ public class ArticleApi {
   private ArticleQueryService articleQueryService;
   private ArticleRepository articleRepository;
   private ArticleCommandService articleCommandService;
+
+  private ArticleEventPubisher articleEventPubisher;
 
   @GetMapping
   public ResponseEntity<?> article(
@@ -55,6 +60,7 @@ public class ArticleApi {
               }
               Article updatedArticle =
                   articleCommandService.updateArticle(article, updateArticleParam);
+              articleEventPubisher.chagneEntity(updatedArticle, "U");
               return ResponseEntity.ok(
                   articleResponse(
                       articleQueryService.findBySlug(updatedArticle.getSlug(), user).get()));
@@ -73,6 +79,7 @@ public class ArticleApi {
                 throw new NoAuthorizationException();
               }
               articleRepository.remove(article);
+              articleEventPubisher.chagneEntity(article, "D");
               return ResponseEntity.noContent().build();
             })
         .orElseThrow(ResourceNotFoundException::new);

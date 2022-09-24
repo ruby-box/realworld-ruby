@@ -8,6 +8,8 @@ import io.spring.core.article.Article;
 import io.spring.core.user.User;
 import java.util.HashMap;
 import javax.validation.Valid;
+
+import io.spring.event.ArticleEventPubisher;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,11 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticlesApi {
   private ArticleCommandService articleCommandService;
   private ArticleQueryService articleQueryService;
+  private ArticleEventPubisher articleEventPubisher;
 
   @PostMapping
   public ResponseEntity createArticle(
       @Valid @RequestBody NewArticleParam newArticleParam, @AuthenticationPrincipal User user) {
     Article article = articleCommandService.createArticle(newArticleParam, user);
+    articleEventPubisher.chagneEntity(article, "C");
     return ResponseEntity.ok(
         new HashMap<String, Object>() {
           {
