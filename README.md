@@ -60,3 +60,10 @@ docker-compose up
 
 # vue-realworld 변경사항
 [변경사항 보기](./vue-realworld/README_CHANGE.md)
+
+
+# TODO
+1. Article History 페이징 처리
+2. Article History 상세페이지
+3. Article History List 페이지 사용자 명 등 meta정보를 더 출력할 수 있도록 수정
+4. 수정 시, Tag값 변경 안되는 버그 수정

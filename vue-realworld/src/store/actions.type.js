@@ -10,6 +10,7 @@ export const COMMENT_DESTROY = "destroyComment";
 export const FAVORITE_ADD = "addFavorite";
 export const FAVORITE_REMOVE = "removeFavorite";
 export const FETCH_ARTICLE = "fetchArticle";
+export const FETCH_ARTICLE_HISTORY = "fetchArticleHistory";
 export const FETCH_ARTICLES = "fetchArticles";
 export const FETCH_COMMENTS = "fetchComments";
 export const FETCH_PROFILE = "fetchProfile";

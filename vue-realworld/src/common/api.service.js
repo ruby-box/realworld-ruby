@@ -75,6 +75,12 @@ export const ArticlesService = {
   }
 };
 
+export const ArticlesHistoryService = {
+  get() {
+    return ApiService.query("article-history");
+  },
+};
+
 export const CommentsService = {
   get(slug) {
     if (typeof slug !== "string") {

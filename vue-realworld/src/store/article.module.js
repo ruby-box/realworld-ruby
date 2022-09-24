@@ -1,6 +1,7 @@
 import Vue from "vue";
 import {
   ArticlesService,
+  ArticlesHistoryService,
   CommentsService,
   FavoriteService
 } from "@/common/api.service";
@@ -16,7 +17,8 @@ import {
   ARTICLE_EDIT_ADD_TAG,
   ARTICLE_EDIT_REMOVE_TAG,
   ARTICLE_DELETE,
-  ARTICLE_RESET_STATE
+  ARTICLE_RESET_STATE,
+  FETCH_ARTICLE_HISTORY
 } from "./actions.type";
 import {
   RESET_STATE,
@@ -24,7 +26,9 @@ import {
   SET_COMMENTS,
   TAG_ADD,
   TAG_REMOVE,
-  UPDATE_ARTICLE_IN_LIST
+  UPDATE_ARTICLE_IN_LIST,
+  ARTICLE_HISTORY_FETCH_START,
+  ARTICLE_HISTORY_FETCH_END
 } from "./mutations.type";
 
 const initialState = {
@@ -35,7 +39,10 @@ const initialState = {
     body: "",
     tagList: []
   },
-  comments: []
+  comments: [],
+  isHistoryLoading: true,
+  articleHistoryCount: 0,
+  articleHistoryList: []
 };
 
 export const state = { ...initialState };
@@ -73,6 +80,12 @@ export const actions = {
     // Update list as well. This allows us to favorite an article in the Home view.
     context.commit(UPDATE_ARTICLE_IN_LIST, data.article, { root: true });
     context.commit(SET_ARTICLE, data.article);
+  },
+  async [FETCH_ARTICLE_HISTORY](context, articleSlug) {
+    context.commit(ARTICLE_HISTORY_FETCH_START);
+    const { data } = await ArticlesHistoryService.get(articleSlug)
+    context.commit(ARTICLE_HISTORY_FETCH_END, data);
+    return data;
   },
   [ARTICLE_PUBLISH]({ state }) {
     return ArticlesService.create(state.article);
@@ -112,7 +125,15 @@ export const mutations = {
     for (let f in state) {
       Vue.set(state, f, initialState[f]);
     }
-  }
+  },
+  [ARTICLE_HISTORY_FETCH_START](state) {
+    state.isHistoryLoading = true;
+  },
+  [ARTICLE_HISTORY_FETCH_END](state, { articleHistoryList, articleHistoryCount }) {
+    state.articleHistoryList = articleHistoryList;
+    state.articleHistoryCount = articleHistoryCount;
+    state.isHistoryLoading = false;
+  },
 };
 
 const getters = {
@@ -121,6 +142,15 @@ const getters = {
   },
   comments(state) {
     return state.comments;
+  },
+  articleHistoryList(state) {
+    return state.articleHistoryList;
+  },
+  isHistoryLoading(state) {
+    return state.isHistoryLoading;
+  },
+  articleHistoryCount(state) {
+    return state.articleHistoryCount;
   }
 };
 

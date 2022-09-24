@@ -3,19 +3,19 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
-          <RwvArticleList type="all" />
+          <RwvArticleHistoryList type="all" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import RwvArticleList from "@/components/ArticleList";
+import RwvArticleHistoryList from "@/components/ArticleHistoryList";
 
 export default {
   name: "rwv-home-global",
   components: {
-    RwvArticleList
+    RwvArticleHistoryList
   }
 };
 </script>
