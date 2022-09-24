@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class ArticleEventPubisher {
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public void chagneEntity(Article article, String mode) {
+    public void changeEntity(Article article, String mode) {
         ArticleChangeEvent event = new ArticleChangeEvent(article, mode);
         applicationEventPublisher.publishEvent(event);
     }

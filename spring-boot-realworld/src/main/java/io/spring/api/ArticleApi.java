@@ -12,7 +12,6 @@ import io.spring.core.service.AuthorizationService;
 import io.spring.core.user.User;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import javax.validation.Valid;
 
 import io.spring.event.ArticleEventPubisher;
@@ -60,7 +59,7 @@ public class ArticleApi {
               }
               Article updatedArticle =
                   articleCommandService.updateArticle(article, updateArticleParam);
-              articleEventPubisher.chagneEntity(updatedArticle, "U");
+              articleEventPubisher.changeEntity(updatedArticle, "U");
               return ResponseEntity.ok(
                   articleResponse(
                       articleQueryService.findBySlug(updatedArticle.getSlug(), user).get()));
@@ -79,7 +78,7 @@ public class ArticleApi {
                 throw new NoAuthorizationException();
               }
               articleRepository.remove(article);
-              articleEventPubisher.chagneEntity(article, "D");
+              articleEventPubisher.changeEntity(article, "D");
               return ResponseEntity.noContent().build();
             })
         .orElseThrow(ResourceNotFoundException::new);

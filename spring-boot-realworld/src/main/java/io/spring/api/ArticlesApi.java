@@ -32,7 +32,7 @@ public class ArticlesApi {
   public ResponseEntity createArticle(
       @Valid @RequestBody NewArticleParam newArticleParam, @AuthenticationPrincipal User user) {
     Article article = articleCommandService.createArticle(newArticleParam, user);
-    articleEventPubisher.chagneEntity(article, "C");
+    articleEventPubisher.changeEntity(article, "C");
     return ResponseEntity.ok(
         new HashMap<String, Object>() {
           {
