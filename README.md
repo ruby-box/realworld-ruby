@@ -1,15 +1,15 @@
 # 개발환경
-## Database
-Mysql latest 버전
+## spring-boot-realworld
+* Datebase : MySQL latest 버전
+* JDK : openjdk 11
 
-## JDK
-openjdk 11
-
-## Vue node.js
-v16.17.0
+## vue-realworld
+* node.js : v16.17.0
 
 
 # Build 하기
+도커 환경 구축 이슈 : https://github.com/ruby-box/realworld-ruby/issues/1
+
 ## spring-boot-realworld 빌드
 
 ### 1. 디렉터리 이동
@@ -46,3 +46,17 @@ cd {root}
 ```bash
 docker-compose up
 ```
+
+# 어플리케이션 정보
+관련 이슈 : https://github.com/ruby-box/realworld-ruby/issues/2
+
+- Vue 프로젝트 접근 : http://localhost:8080
+- Spring Boot App 접근 : http://localhost:8081
+
+
+# spring-boot-realworld 변경사항
+[변경사항 보기](./spring-boot-realworld/README_CHANGE.md)
+
+
+# vue-realworld 변경사항
+[변경사항 보기](./vue-realworld/README_CHANGE.md)

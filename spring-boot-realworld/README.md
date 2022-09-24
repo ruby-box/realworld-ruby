@@ -83,8 +83,12 @@ Please fork and PR to improve the project.
 
 # 변경사항
 
-## 도커 이미지 빌드하기
+## 1) 외부 DB 사용 및 JPA 구성
+외부 database : MySQL 
 
-```bash
-docker build -t unacha/spring-boot-realworld .
-```
+관련 이슈 : https://github.com/ruby-box/realworld-ruby/issues/3
+
+## 2) Article 히스토리 저장 구현
+대상 테이블 : article_history
+
+관련 이슈 : https://github.com/ruby-box/realworld-ruby/issues/4
