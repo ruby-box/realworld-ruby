@@ -1,10 +1,20 @@
 # 개발환경
+* GitHub URL : https://github.com/ruby-box/realworld-ruby
+
 ## spring-boot-realworld
 * Datebase : MySQL latest 버전
 * JDK : openjdk 11
 
 ## vue-realworld
 * node.js : v16.17.0
+
+
+# 환경 준비
+Vue 프로젝트 의존성 설치
+```
+cd vue-realworld
+yarn install
+```
 
 
 # Build 하기
