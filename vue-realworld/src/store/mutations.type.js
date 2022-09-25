@@ -4,6 +4,7 @@ export const PURGE_AUTH = "logOut";
 export const SET_ARTICLE = "setArticle";
 export const ARTICLE_HISTORY_FETCH_START = "setArticleHistoryStart";
 export const ARTICLE_HISTORY_FETCH_END = "setArticleHistoryEnd";
+export const SET_ARTICLE_HISTORY_DETAIL = "setArticleHistoryDetail";
 export const SET_AUTH = "setUser";
 export const SET_COMMENTS = "setComments";
 export const SET_ERROR = "setError";

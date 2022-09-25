@@ -18,7 +18,8 @@ import {
   ARTICLE_EDIT_REMOVE_TAG,
   ARTICLE_DELETE,
   ARTICLE_RESET_STATE,
-  FETCH_ARTICLE_HISTORY
+  FETCH_ARTICLE_HISTORY,
+  FETCH_ARTICLE_HISTORY_DETAIL
 } from "./actions.type";
 import {
   RESET_STATE,
@@ -28,7 +29,8 @@ import {
   TAG_REMOVE,
   UPDATE_ARTICLE_IN_LIST,
   ARTICLE_HISTORY_FETCH_START,
-  ARTICLE_HISTORY_FETCH_END
+  ARTICLE_HISTORY_FETCH_END,
+  SET_ARTICLE_HISTORY_DETAIL
 } from "./mutations.type";
 
 const initialState = {
@@ -42,7 +44,14 @@ const initialState = {
   comments: [],
   isHistoryLoading: true,
   articleHistoryCount: 0,
-  articleHistoryList: []
+  articleHistoryList: [],
+  articleHistory: {
+    author: {},
+    title: "",
+    description: "",
+    body: "",
+    tagList: []
+  }
 };
 
 export const state = { ...initialState };
@@ -81,10 +90,15 @@ export const actions = {
     context.commit(UPDATE_ARTICLE_IN_LIST, data.article, { root: true });
     context.commit(SET_ARTICLE, data.article);
   },
-  async [FETCH_ARTICLE_HISTORY](context, articleSlug) {
+  async [FETCH_ARTICLE_HISTORY](context) {
     context.commit(ARTICLE_HISTORY_FETCH_START);
-    const { data } = await ArticlesHistoryService.get(articleSlug)
+    const { data } = await ArticlesHistoryService.query();
     context.commit(ARTICLE_HISTORY_FETCH_END, data);
+    return data;
+  },
+  async [FETCH_ARTICLE_HISTORY_DETAIL](context, id) {
+    const { data } = await ArticlesHistoryService.get(id);
+    context.commit(SET_ARTICLE_HISTORY_DETAIL, data.article_history);
     return data;
   },
   [ARTICLE_PUBLISH]({ state }) {
@@ -134,6 +148,9 @@ export const mutations = {
     state.articleHistoryCount = articleHistoryCount;
     state.isHistoryLoading = false;
   },
+  [SET_ARTICLE_HISTORY_DETAIL](state, data) {
+    state.articleHistory = data;
+  }
 };
 
 const getters = {
@@ -151,6 +168,9 @@ const getters = {
   },
   articleHistoryCount(state) {
     return state.articleHistoryCount;
+  },
+  articleHistory(state) {
+    return state.articleHistory;
   }
 };
 

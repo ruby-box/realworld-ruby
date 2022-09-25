@@ -76,8 +76,11 @@ export const ArticlesService = {
 };
 
 export const ArticlesHistoryService = {
-  get() {
+  query() {
     return ApiService.query("article-history");
+  },
+  get(id) {
+    return ApiService.get("article-history", id);
   },
 };
 

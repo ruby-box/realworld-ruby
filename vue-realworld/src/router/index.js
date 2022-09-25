@@ -77,6 +77,12 @@ export default new Router({
       path: "/article-history",
       props: true,
       component: () => import("@/views/ArticleHistory")
+    },
+    {
+      name: "article-history-detail",
+      path: "/article-history-detail/:id",
+      props: true,
+      component: () => import("@/views/ArticleHistoryDetail")
     }
   ]
 });

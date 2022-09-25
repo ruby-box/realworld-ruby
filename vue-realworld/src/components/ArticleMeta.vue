@@ -20,7 +20,7 @@
       :canModify="isCurrentUser()"
     ></rwv-article-actions>
     <button
-      v-else
+      v-else-if="!(actions || isHistory)"
       class="btn btn-sm pull-xs-right"
       @click="toggleFavorite"
       :class="{
@@ -50,6 +50,11 @@ export default {
       required: true
     },
     actions: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isHistory:{
       type: Boolean,
       required: false,
       default: false

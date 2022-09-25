@@ -61,9 +61,17 @@ docker-compose up
 # vue-realworld 변경사항
 [변경사항 보기](./vue-realworld/README_CHANGE.md)
 
+# 완료
+1. docker-compose 환경 구축
+2. Vue, Spring API 연동
+3. MySQL 외부 데이터베이스 연동
+4. Article 히스토리 저장
+5. Article 히스토리 리스트 구현(화면, API)
+6. Article 히스토리 상세보기 구현(화면, API)
 
-# TODO
+
+# 남은 일감
 1. Article History 페이징 처리
-2. Article History 상세페이지
-3. Article History List 페이지 사용자 명 등 meta정보를 더 출력할 수 있도록 수정
-4. 수정 시, Tag값 변경 안되는 버그 수정
+2. Article History List 페이지 사용자 명 등 meta정보를 더 출력할 수 있도록 수정
+3. 수정 시, Tag값 변경 안되는 버그 수정
+4. 추가 기능 테스트 코드 작성
