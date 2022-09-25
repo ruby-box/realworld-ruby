@@ -19,16 +19,22 @@ public class ArticleHistory {
 
     @Column(columnDefinition = "varchar(255)")
     private String userId;
+
     @Column(columnDefinition = "varchar(255)")
     private String articleId;
+
     @Column(columnDefinition = "varchar(255)")
     private String slug;
+
     @Column(columnDefinition = "varchar(255)")
     private String title;
+
     @Lob
     private String description;
+
     @Lob
     private String body;
+
     @Column(columnDefinition = "char(1)")
     private String mode;
     //@OneToMany
